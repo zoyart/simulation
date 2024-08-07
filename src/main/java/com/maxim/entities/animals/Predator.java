@@ -1,34 +1,19 @@
-package com.maxim;
+package com.maxim.entities.animals;
 
-import java.util.Random;
+import com.maxim.entities.Creature;
+import com.maxim.entities.EntityType;
+import lombok.Getter;
 
+@Getter
 public class Predator extends Creature {
-    // Хищник
-    private int y = 0;
-    private int x = 0;
     public Predator() {
-        super(15, 15);
+        super.setIcon("\uD83E\uDD81");
+        super.setType(EntityType.PREDATOR);
     }
 
     @Override
     public void makeMove() {
         // speed можно сделать на то сколько шагов он может ходить допустим если 2 две клетки может перепрыгивать
         // if nearby the animals eat them else move somewhere
-    }
-
-    public int getY() {
-        return y;
-    }
-
-    public int getX() {
-        return x;
-    }
-
-    public void setY(int y) {
-        this.y = y;
-    }
-
-    public void setX(int x) {
-        this.x = x;
     }
 }
