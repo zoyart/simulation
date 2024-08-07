@@ -12,8 +12,8 @@ import java.util.List;
 @Getter
 @Setter
 public class Map {
-    Entity[][] matrix;
-    List<Coordinate> emptyCellsInMatrix = new ArrayList<>();
+    private Entity[][] matrix;
+    private List<Coordinate> emptyCellsInMatrix = new ArrayList<>();
 
     public Map() {
         Settings settings = Settings.getInstance();
