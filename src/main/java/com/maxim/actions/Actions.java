@@ -6,6 +6,7 @@ import com.maxim.actions.init.InitPredators;
 import com.maxim.actions.init.InitRock;
 import com.maxim.actions.init.InitStrategy;
 import com.maxim.actions.init.InitTree;
+import com.maxim.entities.Creature;
 import com.maxim.map.Map;
 
 import java.util.ArrayList;
@@ -27,7 +28,11 @@ public class Actions {
         }
     }
 
-    public static void turnActions() {
+    public static void turnActions(Map map) {
+        List<Creature> creatures = new ArrayList<>();
 
+        for (Creature creature : creatures) {
+            creature.makeMove();
+        }
     }
 }

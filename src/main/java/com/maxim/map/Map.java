@@ -31,7 +31,7 @@ public class Map {
         }
     }
 
-    public void printMatrix() {
+    public void renderMatrix() {
         // TODO
 //        System.out.print("\r");
         for (int i = 0; i < matrix[0].length; i++) {
