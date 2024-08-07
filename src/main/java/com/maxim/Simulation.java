@@ -14,7 +14,7 @@ public class Simulation {
         Simulation simulation = new Simulation();
         Map map = simulation.getMap();
 
-        // Инициализация всех объъектов на карте
+        // Инициализация всех объъектов на карте.
         Actions.initActions(map);
 
         // Выполнение шага по вводу пользователя
