@@ -13,8 +13,8 @@ public class Simulation {
     public static void main(String[] args) {
         Simulation simulation = new Simulation();
         Map map = simulation.getMap();
-
-        // Инициализация всех объъектов на карте.
+        map.renderMatrix();
+        // Инициализация всех объектов на карте.
         Actions.initActions(map);
 
         // Выполнение шага по вводу пользователя
