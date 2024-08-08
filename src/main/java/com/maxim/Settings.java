@@ -16,10 +16,12 @@ public class Settings {
     private final int mapSizeX = 10;
     private final int mapSizeY = 10;
 
-    private final int predatorsMaxCount = 5;
-    private final int herbivoresMaxCount = 10;
+    private final int predatorsMaxCount = 1;
+    private final int herbivoresMaxCount = 1;
 
-    private final int rockMaxCount = 10;
-    private final int grassMaxCount = 10;
-    private final int treesMaxCount = 10;
+    private final int rockMaxCount = 1;
+    private final int grassMaxCount = 2;
+    private final int treesMaxCount = 1;
+
+    private final int grassPerTurn = 2;
 }

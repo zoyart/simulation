@@ -11,7 +11,7 @@ import java.util.List;
 import java.util.Random;
 
 @NoArgsConstructor
-public class InitHerbivore implements InitStrategy {
+public class InitHerbivoreStrategy implements InitStrategy {
     @Override
     public void init(Map map) {
         Settings settings = Settings.getInstance();

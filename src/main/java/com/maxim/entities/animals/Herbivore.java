@@ -7,6 +7,8 @@ public class Herbivore extends Creature {
     public Herbivore() {
         super.setIcon("\uD83D\uDC11");
         super.setType(EntityType.HERBIVORE);
+        super.setHealth(10);
+        super.setDamage(1);
     }
 
     @Override

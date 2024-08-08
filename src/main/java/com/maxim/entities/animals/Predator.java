@@ -9,6 +9,8 @@ public class Predator extends Creature {
     public Predator() {
         super.setIcon("\uD83E\uDD81");
         super.setType(EntityType.PREDATOR);
+        super.setHealth(20);
+        super.setDamage(5);
     }
 
     @Override

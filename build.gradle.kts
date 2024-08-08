@@ -21,5 +21,9 @@ tasks.test {
 }
 
 application {
-    mainClass.set("com.maxim.Simulation")
+    mainClass.set("com.maxim.Main")
+}
+
+tasks.getByName("run", JavaExec::class) {
+    standardInput = System.`in`
 }

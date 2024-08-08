@@ -1,6 +1,7 @@
 package com.maxim.entities;
 
 import com.maxim.map.Coordinate;
+import com.maxim.map.Map;
 import lombok.Getter;
 import lombok.Setter;
 

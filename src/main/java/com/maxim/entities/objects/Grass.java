@@ -2,6 +2,7 @@ package com.maxim.entities.objects;
 
 import com.maxim.entities.Entity;
 import com.maxim.entities.EntityType;
+import com.maxim.map.Map;
 
 public class Grass extends Entity {
     public Grass() {
