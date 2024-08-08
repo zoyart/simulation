@@ -4,12 +4,13 @@ import com.maxim.Settings;
 import com.maxim.entities.Entity;
 import com.maxim.entities.EntityType;
 import com.maxim.entities.objects.Soil;
+import com.maxim.util.Utils;
 import lombok.Getter;
 import lombok.Setter;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Random;
+import java.util.Objects;
 
 @Getter
 @Setter
@@ -24,6 +25,9 @@ public class Map {
         fillMatrix();
     }
 
+    /**
+     * Метод приводит матрицу в начальное состояние для игры.
+     */
     public void fillMatrix() {
         for (int i = 0; i < matrix[0].length; i++) {
             for (int j = 0; j < matrix.length; j++) {
@@ -33,7 +37,12 @@ public class Map {
         }
     }
 
+    /**
+     * Метод отвечает за форматированный вывод матрицы на экран.
+     */
     public void renderMatrix() {
+        System.out.print("\033[H\033[2J");
+        System.out.flush();
         for (int i = 0; i < matrix[0].length; i++) {
             for (int j = 0; j < matrix.length; j++) {
                 Entity entity = matrix[i][j];
@@ -43,8 +52,54 @@ public class Map {
         }
     }
 
-    public void spawnEntityInMap(Entity entity, Coordinate coordinate) {
-        this.matrix[coordinate.getX()][coordinate.getY()] = entity;
+    /**
+     * Метод отвечает за добавление существа на карту
+     * NOTE1: метод автоматически УДАЛЯЕТ переданную координату из списка пустых координат карты.
+     * NOTE2: метод не отвечает за валидацию координаты (не проверяет свободна ли она и т.д.).
+     *
+     * @param entity существо, которое необходимо добавить
+     */
+    public void spawnEntity(Entity entity) {
+        Coordinate entityCoordinate = entity.getCoordinate();
+        this.matrix[entityCoordinate.getY()][entityCoordinate.getX()] = entity;
+
+        // Удаление координаты из списка emptyCellsInMatrix.
+        if (!Objects.equals(entity.getType().toString(), EntityType.SOIL.toString())) { // Если заспавнилась не земля
+            int removeIndex;
+            for (int i = 0; i < this.emptyCellsInMatrix.size(); i++) {
+                Coordinate checkCoordinate = emptyCellsInMatrix.get(i);
+                int x = checkCoordinate.getX();
+                int y = checkCoordinate.getY();
+
+                if (x == entityCoordinate.getX() && y == entityCoordinate.getY()) {
+                    removeIndex = i;
+                    emptyCellsInMatrix.remove(removeIndex);
+                }
+            }
+        }
+    }
+
+    /**
+     * Метод отвечает за удаление существа с карты
+     * NOTE1: метод автоматически ДОБАВЛЯЕТ переданную координату в список пустых координат карты.
+     * NOTE2: метод не отвечает за валидацию координаты (не проверяет свободна ли она и т.д.).
+     *
+     * @param coordinate координаты по которым необходимо удалить существо
+     */
+    public void deleteEntity(Coordinate coordinate) {
+        this.matrix[coordinate.getY()][coordinate.getX()] = new Soil();
+        this.emptyCellsInMatrix.add(coordinate);
+    }
+
+    /**
+     * Метод перемещает сужность из одной координаты в другую.
+     *
+     * @param entity сущность, которую нужно переместить
+     * @param from из какой координаты переместить
+     */
+    public void relocateEntity(Entity entity, Coordinate from) {
+        this.spawnEntity(entity);
+        this.deleteEntity(from);
     }
 
     /**
@@ -68,9 +123,9 @@ public class Map {
     }
 
     /**
-     * Метод возвращает всех животных на карте УКАЗАННОГО класса.
+     * Метод возвращает всех животных УКАЗАННОГО класса.
      *
-     * @param targetClass какой тип объектов вернуть
+     * @param targetClass класс возвращаемых объектов
      * @return список объектов указанного класса
      * @param <T> класс объекта
      */
@@ -79,12 +134,33 @@ public class Map {
         for (int i = 0; i < matrix[0].length; i++) {
             for (int j = 0; j < matrix.length; j++) {
                 Entity entity = matrix[i][j];
-
                 if (targetClass.isInstance(entity)) {
                     entities.add(targetClass.cast(entity));
                 }
             }
         }
         return entities;
+    }
+
+    /**
+     * Метод обрабатывает полученные enum значения и ищет их на карте.
+     * Если существо из списка, оно добавляется в барьер.
+     *
+     * @param necessaryBarriers значения которые попадают под выборку
+     * @return возвращает список координат, которые являются препятствием.
+     * @param <T> любой тип enum.
+     */
+    public <T extends Enum<?>> List<Coordinate> getAllBarriers(T[] necessaryBarriers) {
+        List<Coordinate> barriers = new ArrayList<>();
+
+        for (int i = 0; i < matrix[0].length; i++) {
+            for (int j = 0; j < matrix.length; j++) {
+                Entity entity = matrix[i][j];
+                if (Utils.containsTypeInTypes(entity.getType(), necessaryBarriers)) {
+                    barriers.add(entity.getCoordinate());
+                }
+            }
+        }
+        return barriers;
     }
 }

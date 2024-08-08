@@ -18,7 +18,6 @@ public class InitTreeStrategy implements InitStrategy{
 
         int treeMaxCount = settings.getTreesMaxCount();
         List<Coordinate> emptyCells = map.getEmptyCellsInMatrix();
-        Entity[][] matrix = map.getMatrix();
 
         for (int i = 0; i < treeMaxCount; i++) {
             Random random = new Random();
@@ -28,8 +27,7 @@ public class InitTreeStrategy implements InitStrategy{
             Tree tree = new Tree();
             tree.setCoordinate(coordinate);
 
-            matrix[coordinate.getX()][coordinate.getY()] = tree; // Добавление на поле predator
-            emptyCells.remove(randomInt);  // Удаление свободной клетки
+            map.spawnEntity(tree);
         }
     }
 }

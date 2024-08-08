@@ -18,7 +18,6 @@ public class InitRockStrategy implements InitStrategy {
 
         int rockMaxCount = settings.getRockMaxCount();
         List<Coordinate> emptyCells = map.getEmptyCellsInMatrix();
-        Entity[][] matrix = map.getMatrix();
 
         for (int i = 0; i < rockMaxCount; i++) {
             Random random = new Random();
@@ -28,8 +27,7 @@ public class InitRockStrategy implements InitStrategy {
             Rock rock = new Rock();
             rock.setCoordinate(coordinate);
 
-            matrix[coordinate.getX()][coordinate.getY()] = rock; // Добавление на поле predator
-            emptyCells.remove(randomInt);  // Удаление свободной клетки
+            map.spawnEntity(rock);
         }
     }
 }

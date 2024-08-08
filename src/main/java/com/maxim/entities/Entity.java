@@ -8,7 +8,8 @@ import lombok.Setter;
 @Getter
 @Setter
 public abstract class Entity {
-    private EntityType type;
-    private String icon;
-    private Coordinate coordinate;
+    protected static final int[][] DIRECTIONS = {{0, 1}, {1, 0}, {0, -1}, {-1, 0}};
+    protected EntityType type;
+    protected String icon;
+    protected Coordinate coordinate;
 }

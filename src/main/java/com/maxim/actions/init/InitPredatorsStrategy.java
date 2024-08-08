@@ -18,7 +18,6 @@ public class InitPredatorsStrategy implements InitStrategy {
 
         int predatorsMaxCount = settings.getPredatorsMaxCount();
         List<Coordinate> emptyCells = map.getEmptyCellsInMatrix();
-        Entity[][] matrix = map.getMatrix();
 
         for (int i = 0; i < predatorsMaxCount; i++) {
             Random random = new Random();
@@ -28,8 +27,8 @@ public class InitPredatorsStrategy implements InitStrategy {
             Predator predator = new Predator();
             predator.setCoordinate(coordinate);
 
-            matrix[coordinate.getX()][coordinate.getY()] = predator; // Добавление на поле predator
-            emptyCells.remove(randomInt);  // Удаление свободной клетки
+            map.spawnEntity(predator);
+
         }
     }
 }

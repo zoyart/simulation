@@ -18,7 +18,6 @@ public class InitHerbivoreStrategy implements InitStrategy {
 
         int herbivoreMaxCount = settings.getHerbivoresMaxCount();
         List<Coordinate> emptyCells = map.getEmptyCellsInMatrix();
-        Entity[][] matrix = map.getMatrix();
 
         for (int i = 0; i < herbivoreMaxCount; i++) {
             Random random = new Random();
@@ -28,8 +27,7 @@ public class InitHerbivoreStrategy implements InitStrategy {
             Herbivore herbivore = new Herbivore();
             herbivore.setCoordinate(coordinate);
 
-            matrix[coordinate.getX()][coordinate.getY()] = herbivore; // Добавление на поле predator
-            emptyCells.remove(randomInt);  // Удаление свободной клетки
+            map.spawnEntity(herbivore);
         }
     }
 }

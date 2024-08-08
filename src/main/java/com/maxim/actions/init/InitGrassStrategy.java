@@ -1,7 +1,6 @@
 package com.maxim.actions.init;
 
 import com.maxim.Settings;
-import com.maxim.entities.Entity;
 import com.maxim.entities.objects.Grass;
 import com.maxim.map.Coordinate;
 import com.maxim.map.Map;
@@ -18,7 +17,6 @@ public class InitGrassStrategy implements InitStrategy{
 
         int grassMaxCount = settings.getGrassMaxCount();
         List<Coordinate> emptyCells = map.getEmptyCellsInMatrix();
-        Entity[][] matrix = map.getMatrix();
 
         for (int i = 0; i < grassMaxCount; i++) {
             Random random = new Random();
@@ -28,8 +26,7 @@ public class InitGrassStrategy implements InitStrategy{
             Grass grass = new Grass();
             grass.setCoordinate(coordinate);
 
-            matrix[coordinate.getX()][coordinate.getY()] = grass; // Добавление на поле predator
-            emptyCells.remove(randomInt);  // Удаление свободной клетки
+            map.spawnEntity(grass);
         }
     }
 }

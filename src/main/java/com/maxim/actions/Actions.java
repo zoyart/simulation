@@ -20,7 +20,7 @@ public class Actions {
                 new InitPredatorsStrategy(),
                 new InitHerbivoreStrategy(),
                 new InitGrassStrategy(),
-                new InitTreeStrategy(),
+//                new InitTreeStrategy(),
                 new InitRockStrategy()
         ));
 

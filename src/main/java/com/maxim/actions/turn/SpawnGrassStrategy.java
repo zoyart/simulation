@@ -25,10 +25,12 @@ public class SpawnGrassStrategy implements TurnStrategy {
                 // Формирование рандомной координаты
                 Random random = new Random();
                 int randomInt = random.nextInt(emptyCellsInMatrix.size());
+                Grass grass = new Grass();
                 Coordinate coordinate = emptyCellsInMatrix.get(randomInt);
+                grass.setCoordinate(coordinate);
 
-                // Постановка травы
-                map.spawnEntityInMap(new Grass(), coordinate);
+                // Спавн травы
+                map.spawnEntity(grass);
             }
         }
     }
