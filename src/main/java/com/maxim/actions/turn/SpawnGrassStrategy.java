@@ -18,7 +18,11 @@ public class SpawnGrassStrategy implements TurnStrategy {
         int grassMaxCount = Settings.GRASS_MAX_COUNT;
         int currentGrassCount = map.getEntityCountByClass(Grass.class);
 
+
         while (currentGrassCount < grassMaxCount && grassPerTurn > 0) {
+            if (emptyCellsInMatrix.isEmpty()) {
+                break;
+            }
 
             // Формирование рандомной координаты
             Random random = new Random();

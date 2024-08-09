@@ -18,6 +18,15 @@ public class Simulation {
     }
 
     public void nextTurn() {
+        // TODO добавить список валидаций после каждого хода и их проверка через цикл
+        // TODO добавить такой же список с правилами игры, чтобы можно было их легко добавлять и расширять
+
+        // Проверка на полностью заполненое поле
+        if (map.getEmptyCellsInMatrix().isEmpty()) {
+            System.out.println("Всё поле занято! Симуляция закончена.");
+            System.exit(0);
+        }
+
         Actions.turnActions(this.map);
         map.renderMatrix();
         Simulation.incrementStepsCount();
