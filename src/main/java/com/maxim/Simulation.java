@@ -1,6 +1,7 @@
 package com.maxim;
 
 import com.maxim.actions.Actions;
+import com.maxim.entities.animals.Herbivore;
 import com.maxim.map.Map;
 
 import lombok.Getter;
@@ -8,7 +9,7 @@ import lombok.Getter;
 @Getter
 public class Simulation {
     private final Map map = new Map();
-    private static int STEPS_COUNT;
+    public static int STEPS_COUNT;
 
     public void init() {
         Actions.initActions(this.map);
@@ -20,7 +21,12 @@ public class Simulation {
         Actions.turnActions(this.map);
         map.renderMatrix();
         Simulation.incrementStepsCount();
-        System.out.println("Это был шаг №" + Simulation.STEPS_COUNT);
+
+        // Правило окончания игры: травоядные == 0
+        if (map.getEntityCountByClass(Herbivore.class) == 0) {
+            System.out.println("Игра закончена.");
+            System.exit(0);
+        }
     }
 
     public static void incrementStepsCount() {

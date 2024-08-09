@@ -23,9 +23,7 @@ public class InitGrassStrategy implements InitStrategy{
             int randomInt = random.nextInt(emptyCells.size());
             Coordinate coordinate = emptyCells.get(randomInt);
 
-            Grass grass = new Grass();
-            grass.setCoordinate(coordinate);
-
+            Grass grass = new Grass(coordinate);
             map.spawnEntity(grass);
         }
     }

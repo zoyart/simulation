@@ -1,7 +1,6 @@
 package com.maxim.actions.init;
 
 import com.maxim.Settings;
-import com.maxim.entities.Entity;
 import com.maxim.entities.objects.Rock;
 import com.maxim.map.Coordinate;
 import com.maxim.map.Map;
@@ -24,9 +23,7 @@ public class InitRockStrategy implements InitStrategy {
             int randomInt = random.nextInt(emptyCells.size());
             Coordinate coordinate = emptyCells.get(randomInt);
 
-            Rock rock = new Rock();
-            rock.setCoordinate(coordinate);
-
+            Rock rock = new Rock(coordinate);
             map.spawnEntity(rock);
         }
     }

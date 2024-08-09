@@ -11,7 +11,8 @@ import java.util.List;
 
 @Getter
 public class Predator extends Creature {
-    public Predator() {
+    public Predator(Coordinate coordinate) {
+        super(coordinate);
         super.setIcon("\uD83E\uDD81");
         super.setType(EntityType.PREDATOR);
         super.setHealth(20);
@@ -21,7 +22,7 @@ public class Predator extends Creature {
     @Override
     public void makeMove(Map map) {
         Coordinate currentCoordinate = super.coordinate;
-        List<Coordinate> pathToHerbivore = super.findPath(map, PredatorBarriersEnum.values(), EntityType.HERBIVORE, currentCoordinate);
+        List<Coordinate> pathToHerbivore = super.findPath(map, PredatorBarriersEnum.values(), Herbivore.class, currentCoordinate);
 
         // Если путь найден
         if (pathToHerbivore != null) {

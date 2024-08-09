@@ -24,9 +24,7 @@ public class InitHerbivoreStrategy implements InitStrategy {
             int randomInt = random.nextInt(emptyCells.size());
             Coordinate coordinate = emptyCells.get(randomInt);
 
-            Herbivore herbivore = new Herbivore();
-            herbivore.setCoordinate(coordinate);
-
+            Herbivore herbivore = new Herbivore(coordinate);
             map.spawnEntity(herbivore);
         }
     }

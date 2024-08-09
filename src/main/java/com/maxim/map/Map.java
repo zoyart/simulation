@@ -1,8 +1,11 @@
 package com.maxim.map;
 
 import com.maxim.Settings;
+import com.maxim.Simulation;
 import com.maxim.entities.Entity;
 import com.maxim.entities.EntityType;
+import com.maxim.entities.animals.Herbivore;
+import com.maxim.entities.animals.Predator;
 import com.maxim.entities.objects.Soil;
 import com.maxim.util.Utils;
 import lombok.Getter;
@@ -31,8 +34,9 @@ public class Map {
     public void fillMatrix() {
         for (int i = 0; i < matrix[0].length; i++) {
             for (int j = 0; j < matrix.length; j++) {
-                this.matrix[i][j] = new Soil(); // Изначально везде "Земля" которая обозначает отсутсвие объектов.
                 this.emptyCellsInMatrix.add(new Coordinate(i, j)); // Изначально все координаты свободны
+                this.matrix[i][j] = new Soil(new Coordinate(i, j)); // Изначально везде "Земля" которая обозначает отсутсвие объектов.
+
             }
         }
     }
@@ -50,6 +54,14 @@ public class Map {
             }
             System.out.println();
         }
+
+        int herbivoreCount = getEntityCountByClass(Herbivore.class);
+        int predatorCount = getEntityCountByClass(Predator.class);
+
+        System.out.println("Шаг №" + Simulation.STEPS_COUNT);
+        System.out.println("Хищников:   " + predatorCount);
+        System.out.println("Травоядных: " + herbivoreCount);
+
     }
 
     /**
@@ -68,10 +80,7 @@ public class Map {
             int removeIndex;
             for (int i = 0; i < this.emptyCellsInMatrix.size(); i++) {
                 Coordinate checkCoordinate = emptyCellsInMatrix.get(i);
-                int x = checkCoordinate.getX();
-                int y = checkCoordinate.getY();
-
-                if (x == entityCoordinate.getX() && y == entityCoordinate.getY()) {
+                if (checkCoordinate.equals(entityCoordinate)) {
                     removeIndex = i;
                     emptyCellsInMatrix.remove(removeIndex);
                 }
@@ -87,7 +96,7 @@ public class Map {
      * @param coordinate координаты по которым необходимо удалить существо
      */
     public void deleteEntity(Coordinate coordinate) {
-        this.matrix[coordinate.getY()][coordinate.getX()] = new Soil();
+        this.matrix[coordinate.getY()][coordinate.getX()] = new Soil(coordinate);
         this.emptyCellsInMatrix.add(coordinate);
     }
 

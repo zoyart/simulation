@@ -24,9 +24,7 @@ public class InitPredatorsStrategy implements InitStrategy {
             int randomInt = random.nextInt(emptyCells.size());
             Coordinate coordinate = emptyCells.get(randomInt);
 
-            Predator predator = new Predator();
-            predator.setCoordinate(coordinate);
-
+            Predator predator = new Predator(coordinate);
             map.spawnEntity(predator);
 
         }

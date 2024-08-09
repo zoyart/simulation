@@ -12,4 +12,9 @@ public abstract class Entity {
     protected EntityType type;
     protected String icon;
     protected Coordinate coordinate;
+    protected boolean hasCollision = true;
+
+    protected Entity(Coordinate coordinate) {
+        this.coordinate = coordinate;
+    }
 }

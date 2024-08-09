@@ -21,6 +21,10 @@ public abstract class Creature extends Entity {
     protected int health;
     protected int damage;
 
+    protected Creature(Coordinate coordinate) {
+        super(coordinate);
+    }
+
     public abstract void makeMove(Map map);
 
     public void attack(Map map, Creature creature) {
@@ -34,15 +38,17 @@ public abstract class Creature extends Entity {
 
     /**
      * Метод вычисляет кратчайший путь до цели.
+     * NOTE1: В координаты пути входит координата самого существа, она находится на нулевой индексе
+     *        и на последнем индексе, координата на которой стоит искомое сущетсво.
      *
      * @param map карта
      * @param seekerBarriers константы enum
-     * @param target тип искомого существа
+     * @param target класс искомого существа
      * @param start координата существа, которое ищет
      * @return список координат до цели, если пути нет - null
      * @param <T>
      */
-    protected <T extends Enum<?>> List<Coordinate> findPath(Map map, T[] seekerBarriers, EntityType target, Coordinate start) {
+    protected <T extends Enum<?>> List<Coordinate> findPath(Map map, T[] seekerBarriers, Class<?> target, Coordinate start) {
         Settings settings = Settings.getInstance();
         int mapSizeX = settings.getMapSizeX();
         int mapSizeY = settings.getMapSizeY();
@@ -65,7 +71,7 @@ public abstract class Creature extends Entity {
             int y = current.getY();
 
             // Если путь до target найден
-            if (currentEntity.getType() == target) {
+            if (target.isInstance(currentEntity)) {
                 return reconstructPath(prev, current);
             }
 

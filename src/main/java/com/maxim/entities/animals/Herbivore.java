@@ -10,7 +10,8 @@ import com.maxim.map.Map;
 import java.util.List;
 
 public class Herbivore extends Creature {
-    public Herbivore() {
+    public Herbivore(Coordinate coordinate) {
+        super(coordinate);
         super.setIcon("\uD83D\uDC11");
         super.setType(EntityType.HERBIVORE);
         super.setHealth(20);
@@ -20,7 +21,7 @@ public class Herbivore extends Creature {
     @Override
     public void makeMove(Map map) {
         Coordinate currentCoordinate = super.coordinate;
-        List<Coordinate> pathToGrass = super.findPath(map, HerbivoreBarriersEnum.values(), EntityType.GRASS, currentCoordinate);
+        List<Coordinate> pathToGrass = super.findPath(map, HerbivoreBarriersEnum.values(), Grass.class, currentCoordinate);
 
         // Если путь найден
         if (pathToGrass != null) {

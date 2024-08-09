@@ -24,8 +24,7 @@ public class InitTreeStrategy implements InitStrategy{
             int randomInt = random.nextInt(emptyCells.size());
             Coordinate coordinate = emptyCells.get(randomInt);
 
-            Tree tree = new Tree();
-            tree.setCoordinate(coordinate);
+            Tree tree = new Tree(coordinate);
 
             map.spawnEntity(tree);
         }
