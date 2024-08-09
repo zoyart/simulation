@@ -4,24 +4,15 @@ import lombok.Getter;
 
 @Getter
 public class Settings {
-    private static Settings instance;
-    private Settings() {}
-    public static Settings getInstance() {
-        if (instance == null) {
-            return new Settings();
-        }
-        return instance;
-    }
+    public static final int MAP_SIZE_X = 10;
+    public static final int MAP_SIZE_Y = 10;
 
-    private final int mapSizeX = 10;
-    private final int mapSizeY = 10;
+    public static final int PREDATORS_MAX_COUNT = 1;
+    public static final int HERBIVORES_MAX_COUNT = 2;
 
-    private final int predatorsMaxCount = 1;
-    private final int herbivoresMaxCount = 2;
+    public static final int ROCK_MAX_COUNT = 20;
+    public static final int TREES_MAX_COUNT = 10;
 
-    private final int rockMaxCount = 20;
-    private final int treesMaxCount = 10;
-
-    private final int grassMaxCount = 4;
-    private final int grassPerTurn = 5;
+    public static final int GRASS_MAX_COUNT = 4;
+    public static final int GRASS_PER_TURN = 5;
 }

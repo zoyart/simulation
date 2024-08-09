@@ -49,9 +49,8 @@ public abstract class Creature extends Entity {
      * @param <T>
      */
     protected <T extends Enum<?>> List<Coordinate> findPath(Map map, T[] seekerBarriers, Class<?> target, Coordinate start) {
-        Settings settings = Settings.getInstance();
-        int mapSizeX = settings.getMapSizeX();
-        int mapSizeY = settings.getMapSizeY();
+        int mapSizeX = Settings.MAP_SIZE_X;
+        int mapSizeY = Settings.MAP_SIZE_Y;
 
         Entity[][] matrix = map.getMatrix();
 

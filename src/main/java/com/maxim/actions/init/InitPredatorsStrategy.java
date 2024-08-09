@@ -14,9 +14,7 @@ import java.util.Random;
 public class InitPredatorsStrategy implements InitStrategy {
     @Override
     public void init(Map map) {
-        Settings settings = Settings.getInstance();
-
-        int predatorsMaxCount = settings.getPredatorsMaxCount();
+        int predatorsMaxCount = Settings.PREDATORS_MAX_COUNT;
         List<Coordinate> emptyCells = map.getEmptyCellsInMatrix();
 
         for (int i = 0; i < predatorsMaxCount; i++) {

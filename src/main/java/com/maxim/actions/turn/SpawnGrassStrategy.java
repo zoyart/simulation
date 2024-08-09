@@ -14,10 +14,8 @@ public class SpawnGrassStrategy implements TurnStrategy {
     @Override
     public void turn(Map map) {
         List<Coordinate> emptyCellsInMatrix = map.getEmptyCellsInMatrix();
-        Settings settings = Settings.getInstance();
-
-        int grassPerTurn = settings.getGrassPerTurn();
-        int grassMaxCount = settings.getGrassMaxCount();
+        int grassPerTurn = Settings.GRASS_PER_TURN;
+        int grassMaxCount = Settings.GRASS_MAX_COUNT;
         int currentGrassCount = map.getEntityCountByClass(Grass.class);
 
         while (currentGrassCount < grassMaxCount && grassPerTurn > 0) {

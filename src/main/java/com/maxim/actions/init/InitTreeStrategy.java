@@ -14,9 +14,7 @@ import java.util.Random;
 public class InitTreeStrategy implements InitStrategy{
     @Override
     public void init(Map map) {
-        Settings settings = Settings.getInstance();
-
-        int treeMaxCount = settings.getTreesMaxCount();
+        int treeMaxCount = Settings.TREES_MAX_COUNT;
         List<Coordinate> emptyCells = map.getEmptyCellsInMatrix();
 
         for (int i = 0; i < treeMaxCount; i++) {

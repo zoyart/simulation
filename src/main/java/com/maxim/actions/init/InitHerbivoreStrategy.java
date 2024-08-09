@@ -14,9 +14,7 @@ import java.util.Random;
 public class InitHerbivoreStrategy implements InitStrategy {
     @Override
     public void init(Map map) {
-        Settings settings = Settings.getInstance();
-
-        int herbivoreMaxCount = settings.getHerbivoresMaxCount();
+        int herbivoreMaxCount = Settings.HERBIVORES_MAX_COUNT;
         List<Coordinate> emptyCells = map.getEmptyCellsInMatrix();
 
         for (int i = 0; i < herbivoreMaxCount; i++) {

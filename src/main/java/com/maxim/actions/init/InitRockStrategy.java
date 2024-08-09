@@ -13,9 +13,7 @@ public class InitRockStrategy implements InitStrategy {
 
     @Override
     public void init(Map map) {
-        Settings settings = Settings.getInstance();
-
-        int rockMaxCount = settings.getRockMaxCount();
+        int rockMaxCount = Settings.ROCK_MAX_COUNT;
         List<Coordinate> emptyCells = map.getEmptyCellsInMatrix();
 
         for (int i = 0; i < rockMaxCount; i++) {

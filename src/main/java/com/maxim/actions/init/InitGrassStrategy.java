@@ -13,9 +13,7 @@ import java.util.Random;
 public class InitGrassStrategy implements InitStrategy{
     @Override
     public void init(Map map) {
-        Settings settings = Settings.getInstance();
-
-        int grassMaxCount = settings.getGrassMaxCount();
+        int grassMaxCount = Settings.GRASS_MAX_COUNT;
         List<Coordinate> emptyCells = map.getEmptyCellsInMatrix();
 
         for (int i = 0; i < grassMaxCount; i++) {

@@ -22,9 +22,7 @@ public class Map {
     private List<Coordinate> emptyCellsInMatrix = new ArrayList<>();
 
     public Map() {
-        Settings settings = Settings.getInstance();
-        this.matrix = new Entity[settings.getMapSizeX()][settings.getMapSizeY()]; // Задаём размеры матрицы
-
+        this.matrix = new Entity[Settings.MAP_SIZE_Y][Settings.MAP_SIZE_X]; // Задаём размеры матрицы
         fillMatrix();
     }
 
