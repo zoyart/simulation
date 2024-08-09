@@ -24,7 +24,7 @@ public class Simulation {
 
         // Правило окончания игры: травоядные == 0
         if (map.getEntityCountByClass(Herbivore.class) == 0) {
-            System.out.println("Игра закончена.");
+            System.out.println("Симуляция закончена.");
             System.exit(0);
         }
     }
