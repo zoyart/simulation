@@ -1,13 +1,13 @@
-package tsoi.artur.entities.animals;
+package artur.tsoi.entities.animals;
 
-import tsoi.artur.Settings;
-import tsoi.artur.entities.Creature;
-import tsoi.artur.entities.Entity;
-import tsoi.artur.entities.EntityType;
-import tsoi.artur.entities.objects.Grass;
-import tsoi.artur.entities.objects.Soil;
-import tsoi.artur.map.Coordinate;
-import tsoi.artur.map.Map;
+import artur.tsoi.Settings;
+import artur.tsoi.entities.Creature;
+import artur.tsoi.entities.Entity;
+import artur.tsoi.entities.EntityType;
+import artur.tsoi.entities.objects.Grass;
+import artur.tsoi.entities.objects.Soil;
+import artur.tsoi.map.Coordinate;
+import artur.tsoi.map.Map;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -17,6 +17,7 @@ import java.util.List;
 @Setter
 public class Herbivore extends Creature {
     private int howEatForReproduction = Settings.HOW_HERBIVORES_EAT_FOR_REPRODUCTION;
+    private final int radiusOfInteraction = 1;
 
     public Herbivore(Coordinate coordinate) {
         super(coordinate);
@@ -28,44 +29,49 @@ public class Herbivore extends Creature {
 
     @Override
     public void makeMove(Map map) {
-        Coordinate currentCoordinate = super.coordinate;
-        List<Coordinate> pathToGrass = super.findPath(map, HerbivoreBarriersEnum.values(), Grass.class, currentCoordinate);
+        Coordinate currentCoordinate = new Coordinate(super.getCoordinate());
+        List<Coordinate> pathToFood = super.findPath(map, HerbivoreBarriersEnum.values(), Grass.class, currentCoordinate);
 
-        // Если путь найден
-        if (pathToGrass != null) {
-            pathToGrass.removeFirst(); // удаляем координату на которой находится сам.
+        if (pathToFood == null) {
+            return;
+        }
 
-            // Если путь до ближайшей цели - 1, кушаем. Иначе идём до цели дальше.
-            if (pathToGrass.size() == 1) {
-                // TODO Тут травоядное ест, красиво бы завернуть это всё в другие методы
-                Entity[][] matrix = map.getMatrix();
-                Coordinate grassCoordinate = pathToGrass.getLast();
-                Grass grass = (Grass) matrix[grassCoordinate.getY()][grassCoordinate.getX()];
-                int grassHealth = grass.getHeath();
+        // Если расстояние до еды равно радиусу взаимодействия. Иначе идём до цели дальше.
+        if (pathToFood.size() == radiusOfInteraction) {
+            Coordinate foodCoordinate = pathToFood.getLast();
+            eat(map, foodCoordinate);
 
-                if (grassHealth > this.damage) {
-                    grass.setHeath(grassHealth - this.damage);
-                } else {
-                    // Куст съеден
-                    map.deleteEntity(grass.getCoordinate());
-
-                    // Проверка на то, достаточно ли животное съело для размножения
-                    this.howEatForReproduction--;
-                    if (howEatForReproduction == 0) {
-                        List<Coordinate> pathToSoil = findPath(map, HerbivoreBarriersEnum.values(), Soil.class, currentCoordinate);
-
-                        if (pathToSoil != null) {
-                            Coordinate emptyPlaceForNewHerbivore = pathToSoil.getLast();
-                            Herbivore newHerbivore = new Herbivore(emptyPlaceForNewHerbivore);
-                            map.spawnEntity(newHerbivore);
-                            howEatForReproduction = Settings.HOW_HERBIVORES_EAT_FOR_REPRODUCTION;
-                        }
-                    }
-                }
-            } else {
-                super.coordinate = pathToGrass.getFirst(); // Устанавливаем новую координату для травоядного
-                map.relocateEntity(this, currentCoordinate);
+            if (this.howEatForReproduction == 0) {
+                reproduction(map);
             }
+        } else {
+            super.coordinate = pathToFood.getFirst(); // Устанавливаем новую координату для перемещения
+            map.relocateEntity(this, currentCoordinate);
+        }
+    }
+
+    public void eat(Map map, Coordinate foodCoordinate) {
+        Entity[][] matrix = map.getMatrix();
+        Grass grass = (Grass) matrix[foodCoordinate.getY()][foodCoordinate.getX()];
+        int grassHealth = grass.getHeath();
+
+        if (grassHealth > this.damage) {
+            grass.setHeath(grassHealth - this.damage);
+        } else {
+            // Куст съеден
+            map.deleteEntity(grass.getCoordinate());
+            this.howEatForReproduction--;
+        }
+    }
+
+    public void reproduction(Map map) {
+        List<Coordinate> pathToSoil = findPath(map, HerbivoreBarriersEnum.values(), Soil.class, super.getCoordinate());
+
+        if (pathToSoil != null) {
+            Coordinate emptyPlaceForNewHerbivore = pathToSoil.getLast();
+            Herbivore newHerbivore = new Herbivore(emptyPlaceForNewHerbivore);
+            map.spawnEntity(newHerbivore);
+            howEatForReproduction = Settings.HOW_HERBIVORES_EAT_FOR_REPRODUCTION;
         }
     }
 }

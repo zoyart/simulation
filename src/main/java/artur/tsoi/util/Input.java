@@ -1,4 +1,4 @@
-package tsoi.artur.util;
+package artur.tsoi.util;
 
 import java.util.Scanner;
 

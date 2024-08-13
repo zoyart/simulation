@@ -1,8 +1,8 @@
-package tsoi.artur;
+package artur.tsoi;
 
-import tsoi.artur.actions.Actions;
-import tsoi.artur.entities.animals.Herbivore;
-import tsoi.artur.map.Map;
+import artur.tsoi.actions.Actions;
+import artur.tsoi.entities.animals.Herbivore;
+import artur.tsoi.map.Map;
 
 import lombok.Getter;
 

@@ -1,16 +1,18 @@
-package tsoi.artur.entities.animals;
+package artur.tsoi.entities.animals;
 
-import tsoi.artur.entities.Creature;
-import tsoi.artur.entities.Entity;
-import tsoi.artur.entities.EntityType;
-import tsoi.artur.map.Coordinate;
-import tsoi.artur.map.Map;
 import lombok.Getter;
+import artur.tsoi.entities.Creature;
+import artur.tsoi.entities.Entity;
+import artur.tsoi.entities.EntityType;
+import artur.tsoi.map.Coordinate;
+import artur.tsoi.map.Map;
 
 import java.util.List;
 
 @Getter
 public class Predator extends Creature {
+    private final int radiusOfInteraction = 1;
+
     public Predator(Coordinate coordinate) {
         super(coordinate);
         super.setIcon("\uD83E\uDD81");
@@ -21,24 +23,33 @@ public class Predator extends Creature {
 
     @Override
     public void makeMove(Map map) {
-        Coordinate currentCoordinate = super.coordinate;
+        Coordinate currentCoordinate = new Coordinate(super.getCoordinate());
         List<Coordinate> pathToHerbivore = super.findPath(map, PredatorBarriersEnum.values(), Herbivore.class, currentCoordinate);
 
-        // Если путь найден
-        if (pathToHerbivore != null) {
-            pathToHerbivore.removeFirst(); // удаляем координату на которой находится сам.
-            // Если путь до ближайшей цели - 1, атакуем цель. Иначе идём до цели дальше
-            if (pathToHerbivore.size() == 1) {
-                Entity[][] matrix = map.getMatrix();
-                Coordinate attackedCoordinate = pathToHerbivore.getLast();
-                Creature attacked = (Creature) matrix[attackedCoordinate.getY()][attackedCoordinate.getX()];
+        if (pathToHerbivore == null) {
+            return;
+        }
 
-                attack(map, attacked);
-            } else {
-                super.coordinate = pathToHerbivore.getFirst(); // Устанавливаем новую координату для хищника
-                map.relocateEntity(this, currentCoordinate);
-            }
+        // Если расстояние до еды равно радиусу взаимодействия. Иначе идём до цели дальше.
+        if (pathToHerbivore.size() == radiusOfInteraction) {
+            Entity[][] matrix = map.getMatrix();
+            Coordinate attackedCoordinate = pathToHerbivore.getLast();
+            Creature attacked = (Creature) matrix[attackedCoordinate.getY()][attackedCoordinate.getX()];
 
+            attack(map, attacked);
+        } else {
+            super.coordinate = pathToHerbivore.getFirst(); // Устанавливаем новую координату для перемещения
+            map.relocateEntity(this, currentCoordinate);
+        }
+    }
+
+    public void attack(Map map, Creature attacked) {
+        int attackedHealth = attacked.getHealth();
+        if (attackedHealth > this.damage) {
+            attacked.setHealth(attackedHealth - this.damage);
+        } else {
+            attacked.setAlive(false); // Помечаем что животное мертво, чтобы оно не сходило в текущем ходу
+            map.deleteEntity(attacked.getCoordinate());
         }
     }
 }

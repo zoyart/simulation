@@ -1,4 +1,4 @@
-package tsoi.artur.map;
+package artur.tsoi.map;
 
 import lombok.Getter;
 import lombok.Setter;
@@ -12,6 +12,11 @@ public class Coordinate {
     public Coordinate(int y, int x) {
         this.x = x;
         this.y = y;
+    }
+
+    public Coordinate(Coordinate coordinate) {
+        this.x = coordinate.getX();
+        this.y = coordinate.getY();
     }
 
     @Override

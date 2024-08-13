@@ -21,7 +21,7 @@ tasks.test {
 }
 
 application {
-    mainClass.set("com.maxim.Main")
+    mainClass.set("artur.tsoi.Main")
 }
 
 tasks.getByName("run", JavaExec::class) {

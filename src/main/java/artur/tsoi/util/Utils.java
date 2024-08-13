@@ -1,4 +1,4 @@
-package tsoi.artur.util;
+package artur.tsoi.util;
 
 public class Utils {
     /**

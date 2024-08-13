@@ -1,8 +1,8 @@
-package tsoi.artur.entities.objects;
+package artur.tsoi.entities.objects;
 
-import tsoi.artur.entities.Entity;
-import tsoi.artur.entities.EntityType;
-import tsoi.artur.map.Coordinate;
+import artur.tsoi.entities.Entity;
+import artur.tsoi.entities.EntityType;
+import artur.tsoi.map.Coordinate;
 
 public class Rock extends Entity {
     public Rock(Coordinate coordinate) {

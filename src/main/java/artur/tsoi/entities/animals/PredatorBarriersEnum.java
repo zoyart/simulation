@@ -1,4 +1,4 @@
-package tsoi.artur.entities.animals;
+package artur.tsoi.entities.animals;
 
 public enum PredatorBarriersEnum {
     ROCK,

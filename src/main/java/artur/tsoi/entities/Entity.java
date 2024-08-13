@@ -1,6 +1,6 @@
-package tsoi.artur.entities;
+package artur.tsoi.entities;
 
-import tsoi.artur.map.Coordinate;
+import artur.tsoi.map.Coordinate;
 import lombok.Getter;
 import lombok.Setter;
 

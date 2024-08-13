@@ -1,6 +1,6 @@
-package tsoi.artur.actions.turn;
+package artur.tsoi.actions.turn;
 
-import tsoi.artur.map.Map;
+import artur.tsoi.map.Map;
 
 public interface TurnStrategy {
     void turn(Map map);

@@ -1,6 +1,6 @@
-package tsoi.artur.actions.init;
+package artur.tsoi.actions.init;
 
-import tsoi.artur.map.Map;
+import artur.tsoi.map.Map;
 
 public interface InitStrategy {
     void init(Map map);

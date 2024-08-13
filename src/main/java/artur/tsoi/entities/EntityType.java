@@ -1,4 +1,4 @@
-package tsoi.artur.entities;
+package artur.tsoi.entities;
 
 public enum EntityType {
     ROCK,

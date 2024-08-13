@@ -1,13 +1,13 @@
-package tsoi.artur.map;
+package artur.tsoi.map;
 
-import tsoi.artur.Settings;
-import tsoi.artur.Simulation;
-import tsoi.artur.entities.Entity;
-import tsoi.artur.entities.EntityType;
-import tsoi.artur.entities.animals.Herbivore;
-import tsoi.artur.entities.animals.Predator;
-import tsoi.artur.entities.objects.Soil;
-import tsoi.artur.util.Utils;
+import artur.tsoi.Settings;
+import artur.tsoi.Simulation;
+import artur.tsoi.entities.Entity;
+import artur.tsoi.entities.EntityType;
+import artur.tsoi.entities.animals.Herbivore;
+import artur.tsoi.entities.animals.Predator;
+import artur.tsoi.entities.objects.Soil;
+import artur.tsoi.util.Utils;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -63,7 +63,7 @@ public class Map {
     }
 
     /**
-     * Метод отвечает за добавление существа на карту
+     * Метод отвечает за добавление существа на карту. Принимается существо уже с новой координатой!
      * NOTE1: метод автоматически УДАЛЯЕТ координату существа из списка пустых координат карты.
      * NOTE2: метод не отвечает за валидацию координаты (не проверяет свободна ли она и т.д.).
      *
@@ -71,6 +71,8 @@ public class Map {
      */
     public void spawnEntity(Entity entity) {
         Coordinate entityCoordinate = entity.getCoordinate();
+
+        // Добавление в матрицу сущнности.
         this.matrix[entityCoordinate.getY()][entityCoordinate.getX()] = entity;
 
         // Удаление координаты из списка emptyCellsInMatrix.

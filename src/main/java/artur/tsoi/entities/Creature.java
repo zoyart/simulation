@@ -1,8 +1,8 @@
-package tsoi.artur.entities;
+package artur.tsoi.entities;
 
-import tsoi.artur.Settings;
-import tsoi.artur.map.Coordinate;
-import tsoi.artur.map.Map;
+import artur.tsoi.Settings;
+import artur.tsoi.map.Coordinate;
+import artur.tsoi.map.Map;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -20,6 +20,7 @@ import java.util.Set;
 public abstract class Creature extends Entity {
     protected int health;
     protected int damage;
+    protected boolean isAlive = true;
 
     protected Creature(Coordinate coordinate) {
         super(coordinate);
@@ -27,19 +28,10 @@ public abstract class Creature extends Entity {
 
     public abstract void makeMove(Map map);
 
-    public void attack(Map map, Creature creature) {
-        int creatureHealth = creature.getHealth();
-        if (creatureHealth > this.damage) {
-            creature.setHealth(creatureHealth - this.damage);
-        } else {
-            map.deleteEntity(creature.getCoordinate());
-        }
-    };
-
     /**
      * Метод вычисляет кратчайший путь до цели.
-     * NOTE1: В координаты пути входит координата самого существа, она находится на нулевой индексе
-     *        и на последнем индексе, координата на которой стоит искомое сущетсво.
+     * NOTE1: В координаты пути входит координата самого существа.
+     *        Координата на которой стоит искомое сущетсво находиться на последнем индексе списка.
      *
      * @param map карта
      * @param seekerBarriers константы enum
@@ -79,10 +71,10 @@ public abstract class Creature extends Entity {
                 int newX = x + direction[0];
                 int newY = y + direction[1];
 
-                // TODO позже можно сделать список валидаций через стратегию (если прям дохуя их будет).
+                // TODO позже можно сделать список валидаций через стратегию (если много их будет).
 
                 if (newX >= 0 && newX < mapSizeX && newY >= 0 && newY < mapSizeY) { // Валидация на выход за поле
-                    Coordinate nextCoordinate = new Coordinate(newY, newX); // Если валидация прошла создаём координату
+                    Coordinate nextCoordinate = new Coordinate(newY, newX);
 
                     // Если новая координата не посещалась, то помечаем
                     if (!visited.contains(nextCoordinate)) {
@@ -107,6 +99,9 @@ public abstract class Creature extends Entity {
         }
 
         Collections.reverse(path);
+
+        path.removeFirst(); // Удаление координаты на которой сущность находится
+
         return path;
     }
 }

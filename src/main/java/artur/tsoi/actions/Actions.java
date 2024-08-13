@@ -1,14 +1,14 @@
-package tsoi.artur.actions;
+package artur.tsoi.actions;
 
-import tsoi.artur.actions.init.InitGrassStrategy;
-import tsoi.artur.actions.init.InitHerbivoreStrategy;
-import tsoi.artur.actions.init.InitPredatorsStrategy;
-import tsoi.artur.actions.init.InitRockStrategy;
-import tsoi.artur.actions.init.InitStrategy;
-import tsoi.artur.actions.turn.CreaturesMakeMoveStrategy;
-import tsoi.artur.actions.turn.TurnStrategy;
-import tsoi.artur.actions.turn.SpawnGrassStrategy;
-import tsoi.artur.map.Map;
+import artur.tsoi.actions.init.InitGrassStrategy;
+import artur.tsoi.actions.init.InitHerbivoreStrategy;
+import artur.tsoi.actions.init.InitPredatorsStrategy;
+import artur.tsoi.actions.init.InitRockStrategy;
+import artur.tsoi.actions.init.InitStrategy;
+import artur.tsoi.actions.turn.CreaturesMakeMoveStrategy;
+import artur.tsoi.actions.turn.TurnStrategy;
+import artur.tsoi.actions.turn.SpawnGrassStrategy;
+import artur.tsoi.map.Map;
 
 import java.util.ArrayList;
 import java.util.List;

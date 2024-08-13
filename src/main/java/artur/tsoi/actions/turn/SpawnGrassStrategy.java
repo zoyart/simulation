@@ -1,9 +1,9 @@
-package tsoi.artur.actions.turn;
+package artur.tsoi.actions.turn;
 
-import tsoi.artur.Settings;
-import tsoi.artur.entities.objects.Grass;
-import tsoi.artur.map.Coordinate;
-import tsoi.artur.map.Map;
+import artur.tsoi.Settings;
+import artur.tsoi.entities.objects.Grass;
+import artur.tsoi.map.Coordinate;
+import artur.tsoi.map.Map;
 import lombok.NoArgsConstructor;
 
 import java.util.List;
@@ -17,7 +17,6 @@ public class SpawnGrassStrategy implements TurnStrategy {
         int grassPerTurn = Settings.GRASS_PER_TURN;
         int grassMaxCount = Settings.GRASS_MAX_COUNT;
         int currentGrassCount = map.getEntityCountByClass(Grass.class);
-
 
         while (currentGrassCount < grassMaxCount && grassPerTurn > 0) {
             if (emptyCellsInMatrix.isEmpty()) {

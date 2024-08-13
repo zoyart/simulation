@@ -1,9 +1,9 @@
-package tsoi.artur.actions.init;
+package artur.tsoi.actions.init;
 
-import tsoi.artur.Settings;
-import tsoi.artur.entities.objects.Rock;
-import tsoi.artur.map.Coordinate;
-import tsoi.artur.map.Map;
+import artur.tsoi.Settings;
+import artur.tsoi.entities.objects.Rock;
+import artur.tsoi.map.Coordinate;
+import artur.tsoi.map.Map;
 
 import java.util.List;
 import java.util.Random;

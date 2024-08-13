@@ -1,9 +1,9 @@
-package tsoi.artur.actions.init;
+package artur.tsoi.actions.init;
 
-import tsoi.artur.Settings;
-import tsoi.artur.entities.objects.Tree;
-import tsoi.artur.map.Coordinate;
-import tsoi.artur.map.Map;
+import artur.tsoi.Settings;
+import artur.tsoi.entities.objects.Tree;
+import artur.tsoi.map.Coordinate;
+import artur.tsoi.map.Map;
 import lombok.NoArgsConstructor;
 
 import java.util.List;
